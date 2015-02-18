@@ -14,6 +14,7 @@ function [] = featureSelection()
     
     [bruteTraingingError, bruteTestError] = bruteForce(trainingData,testData);
     [lassoTrainingError,lassoTestError,lassoLambdas] = lassoRegression(trainingData,testData);
+    
     [ridgeTrainingError,ridgeTestError, ridgeLambdas] = ridgeRegression(trainingData,testData,lassoLambdas);
     
     x = 1:length(lassoTestError);
@@ -22,11 +23,8 @@ function [] = featureSelection()
     hold on, plot(x,ridgeTestError, '.-r');
     
     for i=1:length(bruteTestError)
-        %i = subsetsize, length(bruteTestError) = number of combinations
-        %i.e. for subsets of size 3, x=3 for each subset
+        %i.e. for subsets of size 3, x=3
         x = i*ones(length(bruteTestError{i}),1);
-        
-        hold on, plot(x,bruteTestError{i},'.g');
     end%plot brute errror
     
     
